@@ -1,0 +1,15 @@
+magic_user.sign_in:
+  path: '/magic-user/sign-in'
+  defaults:
+    _title: 'Magic User sign in'
+    _controller: '\Drupal\magic_user\Controller\MagicUserController::build'
+  requirements:
+    _permission: 'access content'
+
+magic_user.settings_form:
+  path: '/admin/config/system/magic-user'
+  defaults:
+    _title: 'Magic User settings'
+    _form: 'Drupal\magic_user\Form\SettingsForm'
+  requirements:
+    _permission: 'administer magic_user configuration'

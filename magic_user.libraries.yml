@@ -1,0 +1,9 @@
+frontend:
+  js:
+    https://auth.magic.link/sdk: {type: external}
+    https://cdn.jsdelivr.net/npm/web3@1.2.11/dist/web3.min.js: {type: external}
+    js/login.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once

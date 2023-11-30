@@ -1,0 +1,16 @@
+# Schema for the configuration files of the Magic User module.
+magic_user.settings:
+  type: config_object
+  label: 'Magic User settings'
+  mapping:
+    apikey:
+      type: string
+      label: 'Api Key'
+
+block.settings.magic_user_magic_login_block:
+  type: block_settings
+  label: 'Magic Login Block block'
+  mapping:
+    foo:
+      type: string
+      label: Foo

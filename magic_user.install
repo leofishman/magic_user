@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Magic User module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function magic_user_install() {
+  \Drupal::messenger()->addStatus(__FUNCTION__);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function magic_user_uninstall() {
+  \Drupal::messenger()->addStatus(__FUNCTION__);
+}

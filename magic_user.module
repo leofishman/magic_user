@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Magic User module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function magic_login_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.magic_login':
+      return '<p>' . t('Integrates with the magic-login service for authentication and registration.') . '</p>';
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function magic_login_menu() {
+  $items = [];
+
+  $items['magic-login/callback'] = [
+    'title' => 'Magic Login Callback',
+    'page callback' => 'magic_login_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  ];
+
+  return $items;
+}
+
+/**
+ * Page callback for the magic-login callback.
+ */
+function magic_login_callback() {
+  // Implement logic to handle the callback from magic-login service.
+  // Verify the authentication and registration details and create or log in the user.
+
+  // Example:
+  // $username = magic_login_get_username();
+  // $email = magic_login_get_email();
+  // $user_exists = magic_login_check_user_exists($username);
+
+  // if (!$user_exists) {
+  //   $user = user_save(drupal_anonymous_user(), [
+  //     'name' => $username,
+  //     'mail' => $email,
+  //     'status' => 1,
+  //   ]);
+  //   user_login_finalize($user);
+  // }
+// status message for successful authentication and registration.
+// \Drupal::logger('magic_user')->info('New user: @username', ['@username' => $username]);
+}
+
+/**
+ * Implements hook_theme().
+ */
+function magic_user_theme($existing, $type, $theme, $path) {
+  return [
+    'block__magic_login' => [
+      'variables' => [],
+      'template' => 'magic-login',
+      'path' => $path . '/templates/',
+      'base hook' => 'block'
+      ]
+    ];
+  }

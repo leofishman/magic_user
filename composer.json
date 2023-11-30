@@ -1,0 +1,11 @@
+{
+    "name": "leofishman/magic_user",
+    "type": "drupal-module",
+    "description": "Implements Magic.link",
+    "homepage": "https://github.com/leofishman/magic_user/",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/core": "^9 || ^10",
+        "magiclabs/magic-admin-php": "^1.0"
+    }
+}

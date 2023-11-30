@@ -1,0 +1,4 @@
+administer magic_user configuration:
+  title: 'Administer magic_user configuration'
+  description: 'Configure Api key and secret.'
+  restrict access: true
