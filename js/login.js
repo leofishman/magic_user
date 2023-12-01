@@ -5,7 +5,7 @@
     Drupal.behaviors.Mlogin = {
         attach: async function (context, settings) {
             $('#magic-script').click(function (event) {
-               event.preventDefault()
+              event.preventDefault()
                const connectWIthUi = async () => {
                 try {
                   var magic = new Magic(apikeypublic, {
