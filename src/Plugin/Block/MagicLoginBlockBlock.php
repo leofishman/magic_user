@@ -93,8 +93,7 @@ class MagicLoginBlockBlock extends BlockBase implements ContainerFactoryPluginIn
   public function build() {
 
     $config = $this->container->get('config.factory');
-
-    $apikeypublic = $config->get('magic_user.settings')->get('apikeypublic');
+    $apikeypublic = $config->get('magic_user.settings')->get('apikeypublic') ?? '';
 
     $build['content'] = [
       '#markup' => $this->t('It works!'),
