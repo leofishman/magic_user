@@ -1,6 +1,6 @@
 magic_user.settings_form:
   title: 'Magic User'
   description: 'Configure Magic User.'
-  parent: system.admin_config_system
+  parent: system.admin_config_services
   route_name: magic_user.settings_form
   weight: 10

@@ -4,7 +4,7 @@ namespace Drupal\magic_user\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use MagicAdmin\Magic;
-
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use MagicAdmin\Util\Http;
@@ -14,47 +14,61 @@ use MagicAdmin\Util\Http;
  */
 class MagicUserController extends ControllerBase {
 
-private $magic;
+  /**
+   * The configuration service.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+  private $magic;
 
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('module_handler'));
+    return new static(
+      $container->get('config.factory'),
+      $container->get('module_handler')
+    );
   }
 
 
 // constructor
-  public function __construct() {
+  public function __construct(ConfigFactoryInterface $config_factory) {
       // TODO get apikey from config
-    $magic = new \MagicAdmin\Magic('sk_live_2F88D0948A96678F');
-    $this->magic = $magic;
-    $token = $magic->token;
-    $did_token = \MagicAdmin\Util\Http::parse_authorization_header_value(
-      getallheaders()['authorization']
-    );
+     $config = $config_factory->get('magic_user.settings');
 
-    //TODO Get did_token from public address magic javascript object
-
-
-    if ($did_token == null) {
-      // DIDT is missing from the original HTTP request header. You can handle this by
-      // remapping it to your application error.
-$magic->token->get_public_address;
-    }
-   // $this->magic = new Magic('sk_live_8D8A307024C07B22',5,5,0.01,);
-dump($this->magic, $did_token);
-    try {
-      $this->magic->token->validate($did_token);
-      $issuer = $this->magic->token->get_issuer($did_token);
-      dump($issuer, $did_token);
-    } catch (\MagicAdmin\Exception\DIDTokenException $e) {
-      dump($e);
-      // DIDT is malformed. You can handle this by remapping it to your application
-      // error.
-    }
-    $this->magic->token = '<KEY>';
+    $this->configFactory = $config;
+    $apikeysecret = $config->get('apikeysecret');
+    
+//    $magic = new \MagicAdmin\Magic($apikeysecret);
+//    $this->magic = $magic;
+//    $token = $magic->token;
+//    $did_token = \MagicAdmin\Util\Http::parse_authorization_header_value(
+//      getallheaders()['authorization']
+//    );
+//
+//    //TODO Get did_token from public address magic javascript object
+//
+//
+//    if ($did_token == null) {
+//      // DIDT is missing from the original HTTP request header. You can handle this by
+//      // remapping it to your application error.
+//$magic->token->get_public_address;
+//    }
+//   // $this->magic = new Magic('sk_live_8D8A307024C07B22',5,5,0.01,);
+//dump($this->magic, $did_token);
+//    try {
+//      $this->magic->token->validate($did_token);
+//      $issuer = $this->magic->token->get_issuer($did_token);
+//      dump($issuer, $did_token);
+//    } catch (\MagicAdmin\Exception\DIDTokenException $e) {
+//      dump($e);
+//      // DIDT is malformed. You can handle this by remapping it to your application
+//      // error.
+//    }
+//    $this->magic->token = '<KEY>';
   }
 
   /**

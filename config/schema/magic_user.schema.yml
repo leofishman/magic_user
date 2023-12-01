@@ -3,10 +3,13 @@ magic_user.settings:
   type: config_object
   label: 'Magic User settings'
   mapping:
-    apikey:
+    apikeysecret:
       type: string
-      label: 'Api Key'
-
+      label: 'Api Key Secret'
+    apikeypublic:
+      type: string
+      label: 'Api Key Publisheable'
+      
 block.settings.magic_user_magic_login_block:
   type: block_settings
   label: 'Magic Login Block block'
