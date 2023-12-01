@@ -1,14 +1,14 @@
-(function ($, Drupal, window, document) {
+(function ($, Drupal,  window, document) {
     'use strict';
-    // TODO get apikey from settings
-    const apikey = 'pk_live_C239FDA89ABAF3AF'
+
+  const apikeypublic = window.drupalSettings.magic
     Drupal.behaviors.Mlogin = {
         attach: async function (context, settings) {
             $('#magic-script').click(function (event) {
                event.preventDefault()
                const connectWIthUi = async () => {
                 try {
-                  var magic = new Magic(apikey, {
+                  var magic = new Magic(apikeypublic, {
                     network: "goerli"
                   });
                   const provider = await magic.wallet.getProvider();
