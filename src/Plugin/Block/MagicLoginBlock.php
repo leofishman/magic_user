@@ -3,12 +3,13 @@
 namespace Drupal\magic_user\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a magic login block block.
+ * Provides a magic login block.
  *
  * @Block(
  *   id = "magic_user_magic_login_block",
@@ -16,19 +17,17 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   category = @Translation("web3")
  * )
  */
-class MagicLoginBlockBlock extends BlockBase implements ContainerFactoryPluginInterface {
-
-
+class MagicLoginBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The container.
+   * Config factory.
    *
-   * @var \Symfony\Component\DependencyInjection\ContainerInterface
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
-  protected $container;
+  protected $configFactory;
 
   /**
-   * Constructs a new MagicLoginBlockBlock instance.
+   * Constructs a new MagicLoginBlock instance.
    *
    * @param array $configuration
    *   The plugin configuration, i.e. an array with configuration values keyed
@@ -39,12 +38,12 @@ class MagicLoginBlockBlock extends BlockBase implements ContainerFactoryPluginIn
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-   *   The container.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *    Config factory.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ContainerInterface $container) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->container = $container;
+    $this->configFactory = $config_factory;
   }
 
   /**
@@ -55,7 +54,7 @@ class MagicLoginBlockBlock extends BlockBase implements ContainerFactoryPluginIn
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('service_container')
+      $container->get('config.factory')
     );
   }
 
@@ -91,16 +90,14 @@ class MagicLoginBlockBlock extends BlockBase implements ContainerFactoryPluginIn
    * {@inheritdoc}
    */
   public function build() {
-
-    $config = $this->container->get('config.factory');
-    $apikeypublic = $config->get('magic_user.settings')->get('apikeypublic') ?? '';
+    $apikeypublic = $this->configFactory->get('magic_user.settings')->get('apikeypublic') ?? '';
 
     $build['content'] = [
       '#markup' => $this->t('It works!'),
       '#theme' => 'block__magic_login',
       '#attached' => [
         'drupalSettings' => [
-          'magic' => $apikeypublic,
+          'apikeypublic' => $apikeypublic,
         ],
         'library' => [
           'magic_user/frontend',

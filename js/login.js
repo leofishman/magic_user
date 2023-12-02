@@ -1,10 +1,11 @@
 (function ($, Drupal,  window, document) {
     'use strict';
 
-  const apikeypublic = window.drupalSettings.magic
     Drupal.behaviors.Mlogin = {
-        attach: async function (context, settings) {
-            $('#magic-script').click(function (event) {
+        attach: async function (context, drupalSettings) {
+          let apikeypublic = drupalSettings.apikeypublic;
+
+          $('#magic-script').click(function (event) {
               event.preventDefault()
                const connectWIthUi = async () => {
                 try {

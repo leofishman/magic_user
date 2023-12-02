@@ -28,16 +28,18 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['apikeysecret'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Api Key Secret'),
-      '#default_value' => $this->config('magic_user.settings')->get('apikeysecret'),
-    ];
-
     $form['apikeypublic'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Api Key Publisheable'),
+      '#title' => $this->t('Publishable Api Key'),
       '#default_value' => $this->config('magic_user.settings')->get('apikeypublic'),
+      '#required' => TRUE,
+    ];
+
+    $form['apikeysecret'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Secret Key'),
+      '#default_value' => $this->config('magic_user.settings')->get('apikeysecret'),
+      '#required' => TRUE,
     ];
 
     return parent::buildForm($form, $form_state);
