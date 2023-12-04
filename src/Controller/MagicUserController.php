@@ -15,13 +15,12 @@ use MagicAdmin\Util\Http;
 class MagicUserController extends ControllerBase {
 
   /**
-   * The configuration service.
+   * Config factory.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
   private $magic;
-
 
   /**
    * {@inheritdoc}
@@ -29,20 +28,26 @@ class MagicUserController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
-      $container->get('module_handler')
     );
   }
 
-
-// constructor
+  /**
+   * MagicUserController constructor.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *     Config factory.
+  */
   public function __construct(ConfigFactoryInterface $config_factory) {
       // TODO get apikey from config
      $config = $config_factory->get('magic_user.settings');
 
     $this->configFactory = $config;
     $apikeysecret = $config->get('apikeysecret');
-    
-//    $magic = new \MagicAdmin\Magic($apikeysecret);
+
+
+    $this->configFactory = $config_factory;
+
+    //    $magic = new \MagicAdmin\Magic($apikeysecret);
 //    $this->magic = $magic;
 //    $token = $magic->token;
 //    $did_token = \MagicAdmin\Util\Http::parse_authorization_header_value(

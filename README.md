@@ -1,4 +1,7 @@
-TODO:
+#### Introduction
+
+Magic User module contains
+https://magic.link/docs/home/welcome
 
 Document this readme.
 

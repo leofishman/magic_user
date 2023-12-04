@@ -9,10 +9,10 @@ magic_user.settings:
     apikeypublic:
       type: string
       label: 'Api Key Publisheable'
-      
+
 block.settings.magic_user_magic_login_block:
   type: block_settings
-  label: 'Magic Login Block block'
+  label: 'Magic Login Block'
   mapping:
     foo:
       type: string
