@@ -4,3 +4,4 @@ description: Provide User integration with magic web3
 package: web3
 core_version_requirement: ^9 || ^10
 version: 0.0.1-dev
+configure: magic_user.settings

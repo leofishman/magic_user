@@ -1,35 +1,29 @@
 #### Introduction
 
-Magic User module contains
-https://magic.link/docs/home/welcome
+This module provides a Magic Link authentication method for Drupal.
 
-Document this readme.
+#### Requirements
 
-    plugins
-      Bloque
-      magic field
-        address, network,...
+- Drupal 9 or later
+- Magic Link account
 
-    Controller
-        Check user status
-        Register new users in Drupal
+#### Installation
 
-    Template
-        link login
+Install as you would normally install a contributed Drupal module. See:
+https://drupal.org/documentation/install/modules-themes/modules-8
+for further information.
 
-    JS
-        on login click, handleLogin
-        check headers auth status
-        connectWIthUi
+#### Configuration
 
-    CSS
+You can configure this module by visiting the configuration page under
+`/admin/config/people/magic-user`.
 
-    module
+#### Documentation
 
+See https://magic.link/docs/home/welcome
 
-    help
+#### Maintainers
 
-    Install
-        config
-        magic fields (address, network,..)
-        Settings
+Current maintainers:
+- [GitHub - leofishman](https://github.com/leofishman)
+- [GitHub - GuidoRobertone](https://github.com/GuidoRobertone)
