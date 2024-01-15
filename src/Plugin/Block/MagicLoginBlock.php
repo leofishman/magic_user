@@ -90,14 +90,19 @@ class MagicLoginBlock extends BlockBase implements ContainerFactoryPluginInterfa
    * {@inheritdoc}
    */
   public function build() {
-    $apikeypublic = $this->configFactory->get('magic_user.settings')->get('apikeypublic') ?? '';
+    $settings = $this->configFactory->get('magic_user.settings');
+    $login_text = $settings->get('login_text') ?? '';
+    $apikeypublic = $settings->get('apikeypublic');
+    $network = $settings->get('network') ?? 'ethereum-goerli';
 
     $build['content'] = [
-      '#markup' => $this->t('It works!'),
+      '#markup' => $this->t('Magic User Block'),
       '#theme' => 'block__magic_login',
+      '#login_text' => $login_text,
       '#attached' => [
         'drupalSettings' => [
           'apikeypublic' => $apikeypublic,
+          'network' => $network
         ],
         'library' => [
           'magic_user/frontend',

@@ -63,7 +63,9 @@ function magic_login_callback() {
 function magic_user_theme($existing, $type, $theme, $path) {
   return [
     'block__magic_login' => [
-      'variables' => [],
+      'variables' => [
+        'login_text' => NULL,
+      ],
       'template' => 'magic-login',
       'path' => $path . '/templates/',
       'base hook' => 'block'
